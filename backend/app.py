@@ -4,6 +4,7 @@ from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identi
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_migrate import Migrate  # ✅ Added for migration
 from datetime import datetime
+import os
 
 from models import db, User, Appointment, Doctor
 from data import doctors as seed_data
