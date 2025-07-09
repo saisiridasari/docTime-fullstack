@@ -5,6 +5,8 @@ import './Doctors.css';
 import DoctorCard from '../components/DoctorCard';
 import AppointmentForm from '../components/AppointmentForm';
 
+const API_BASE_URL = process.env.REACT_APP_API_URL;
+
 function Doctors() {
   const [selectedDoctor, setSelectedDoctor] = useState(null);
   const [appointments, setAppointments] = useState([]);
@@ -12,13 +14,13 @@ function Doctors() {
   const [doctors, setDoctors] = useState([]);
   const location = useLocation();
 
-  // Fetch doctors from the backend
+  // Fetch doctors from backend
   useEffect(() => {
-    axios.get('http://localhost:5000/api/doctors')
+    axios.get(`${API_BASE_URL}/api/doctors`)
       .then((res) => setDoctors(res.data))
       .catch((err) => {
         console.error("Error fetching doctors:", err);
-        alert("Failed to load doctors. Please check if the backend is running.");
+        alert("Failed to load doctors.");
       });
   }, []);
 

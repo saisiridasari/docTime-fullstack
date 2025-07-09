@@ -2,17 +2,18 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './Appointments.css';
 
+const API_BASE_URL = process.env.REACT_APP_API_URL;
+
 function Appointments() {
   const [appointments, setAppointments] = useState([]);
 
-  // Fetch appointments on mount
   useEffect(() => {
     fetchAppointments();
   }, []);
 
   const fetchAppointments = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/appointments');
+      const res = await axios.get(`${API_BASE_URL}/api/appointments`);
       setAppointments(res.data);
     } catch (err) {
       console.error("Error fetching appointments:", err);
@@ -24,7 +25,7 @@ function Appointments() {
     if (!confirmDelete) return;
 
     try {
-      await axios.delete(`http://localhost:5000/api/appointments/${id}`);
+      await axios.delete(`${API_BASE_URL}/api/appointments/${id}`);
       alert('Appointment cancelled successfully!');
       setAppointments(appointments.filter(appt => appt.id !== id));
     } catch (err) {

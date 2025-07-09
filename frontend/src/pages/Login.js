@@ -5,6 +5,8 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './Login.css';
 
+const API_BASE_URL = process.env.REACT_APP_API_URL;
+
 function Login() {
   const [form, setForm] = useState({ email: '', password: '' });
   const navigate = useNavigate();
@@ -14,31 +16,31 @@ function Login() {
   };
 
   const handleLogin = async (e) => {
-  e.preventDefault();
+    e.preventDefault();
 
-  try {
-    const res = await axios.post('http://localhost:5000/api/login', form, {
-      headers: { 'Content-Type': 'application/json' }
-    });
+    try {
+      const res = await axios.post(`${API_BASE_URL}/api/login`, form, {
+        headers: { 'Content-Type': 'application/json' }
+      });
 
-    const { message, access_token, user } = res.data;
+      const { message, access_token, user } = res.data;
 
-    if (user && user.name && user.email) {
-      localStorage.setItem('isLoggedIn', 'true');
-      localStorage.setItem('userName', user.name);
-      localStorage.setItem('userEmail', user.email);
-      localStorage.setItem('token', access_token);
+      if (user && user.name && user.email) {
+        localStorage.setItem('isLoggedIn', 'true');
+        localStorage.setItem('userName', user.name);
+        localStorage.setItem('userEmail', user.email);
+        localStorage.setItem('token', access_token);
 
-      alert(message || 'Login successful');
-      navigate('/appointments');
-    } else {
-      alert('Login failed: Missing user data.');
+        alert(message || 'Login successful');
+        navigate('/appointments');
+      } else {
+        alert('Login failed: Missing user data.');
+      }
+    } catch (err) {
+      console.error('Login error:', err);
+      alert('Login failed. Please try again.');
     }
-  } catch (err) {
-    console.error('Login error:', err);
-    alert('Login failed. Please try again.');
-  }
-};
+  };
 
   return (
     <div className="login-wrapper">

@@ -1,7 +1,11 @@
+// frontend/src/pages/Register.js
+
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './Register.css';
+
+const API_BASE_URL = process.env.REACT_APP_API_URL;
 
 function Register() {
   const [form, setForm] = useState({
@@ -19,7 +23,7 @@ function Register() {
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('http://localhost:5000/api/register', form);
+      const res = await axios.post(`${API_BASE_URL}/api/register`, form);
       alert(res.data.message);
 
       localStorage.setItem('userName', form.name);
