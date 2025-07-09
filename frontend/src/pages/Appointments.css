@@ -1,0 +1,27 @@
+.appointment-list {
+  list-style: none;
+  padding: 0;
+}
+
+.appointment-item {
+  border: 1px solid #ccc;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+.cancel-button {
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  margin-top: 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  font-size: 14px;
+}
+
+.cancel-button:hover {
+  background-color: #e60000;
+}
+
