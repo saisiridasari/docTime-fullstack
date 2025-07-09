@@ -10,6 +10,9 @@ import Appointments from './pages/Appointments';
 import Login from './pages/Login';
 import Register from './pages/Register';
 
+// ✅ Get API base URL from environment variable
+const API_BASE_URL = process.env.REACT_APP_API_URL;
+
 function App() {
   return (
     <div className="app-container">
@@ -20,13 +23,20 @@ function App() {
       <main style={{ padding: '20px' }}>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/doctors" element={<Doctors />} />
-          <Route path="/appointments" element={<Appointments />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
+          <Route path="/doctors" element={<Doctors apiUrl={API_BASE_URL} />} />
+          <Route path="/appointments" element={<Appointments apiUrl={API_BASE_URL} />} />
+          <Route path="/login" element={<Login apiUrl={API_BASE_URL} />} />
+          <Route path="/register" element={<Register apiUrl={API_BASE_URL} />} />
 
           {/* Fallback for undefined routes */}
-          <Route path="*" element={<h2 style={{ textAlign: 'center', marginTop: '50px' }}>404 - Page Not Found</h2>} />
+          <Route
+            path="*"
+            element={
+              <h2 style={{ textAlign: 'center', marginTop: '50px' }}>
+                404 - Page Not Found
+              </h2>
+            }
+          />
         </Routes>
       </main>
 
